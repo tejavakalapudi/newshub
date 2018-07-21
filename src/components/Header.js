@@ -11,86 +11,19 @@ import {
     DropdownMenu, 
 } from "reactstrap";
 import { NavLink } from "react-router-dom";
-
 import { setPublisherFilter, setCategoryFilter, setTextFilter, setSortFilter } from "../actions/filters";
-import { FaHeart, FaSearch, FaNewspaperO, FaSort } from "react-icons/lib/fa";
+import { FaHeart, FaSearch, FaNewspaperO, FaSort, FaHome } from "react-icons/lib/fa";
 import { IoGrid  } from "react-icons/lib/io";
 
 class HeaderComponent extends React.Component{
 
     state = {
-        headerClass : "header__container mx-auto",
         listOfPublishers : [],
         listOfCategories : [],
         selectedPublisher : "None",
         selectedCategory : "None",
         sortedOrder : "",
         activeTab : ""
-    }
-
-    isMobileDevice = () => {
-        return ( typeof window.orientation !== "undefined" ) || ( navigator.userAgent.indexOf( 'IEMobile' ) !== -1 );
-    };
-
-    renderMenuDropdown = () => (
-        <Nav>
-            <UncontrolledDropdown nav inNavbar className = "dropdown-navitem">
-                <DropdownToggle nav caret className = "navlink">
-                    Menu
-                </DropdownToggle>
-                <DropdownMenu right>
-                    <DropdownItem>
-                        <NavLink to = "/" exact={true} activeClassName = "is-active" className = "dropdown-navlink">Home</NavLink>
-                    </DropdownItem>
-                    <DropdownItem>
-                        <NavLink to = "/projects" activeClassName = "is-active" className = "dropdown-navlink">Projects</NavLink>
-                    </DropdownItem>
-                    <DropdownItem>
-                        <NavLink to = "/buyersguide" activeClassName = "is-active" className = "dropdown-navlink">Buyers Guide</NavLink>
-                    </DropdownItem>
-                    <DropdownItem>
-                        <NavLink to = "/contactus" activeClassName = "is-active" className = "dropdown-navlink" >Contact</NavLink>
-                    </DropdownItem>
-                    <DropdownItem>
-                        <NavLink to = "/admin" activeClassName = "is-active" className = "dropdown-navlink" >Admin</NavLink>
-                    </DropdownItem>
-                </DropdownMenu>
-            </UncontrolledDropdown>
-        </Nav>
-    );
-
-    renderMenuBar = () => (
-        <Nav>
-            <NavItem className = "projects_navitem">
-                <NavLink to = "/" exact={true} activeClassName = "is-active" className = "navlink navlink-right">Home</NavLink>
-            </NavItem>
-            <NavItem className = "projects_navitem">
-                <NavLink to = "/projects" activeClassName = "is-active" className = "navlink navlink-right">Projects</NavLink>
-            </NavItem>
-            <NavItem className = "projects_navitem">
-                <NavLink to = "/buyersguide" activeClassName = "is-active" className = "navlink navlink-right">Buyers Guide</NavLink>
-            </NavItem>
-            <NavItem className = "projects_navitem">
-                <NavLink to = "/contactus" activeClassName = "is-active" className = "navlink navlink-right" >Contact</NavLink>
-            </NavItem>
-            <NavItem className = "projects_navitem">
-                <NavLink to = "/admin" activeClassName = "is-active" className = "navlink navlink-right" >Admin</NavLink>
-            </NavItem>
-        </Nav>
-    );
-
-    renderNavs = () => {
-
-        if( this.isMobileDevice() ){
-
-            return this.renderMenuDropdown();
-
-        } else {
-
-            return this.renderMenuBar();
-
-        }
-
     }
 
     handleTextFilter = ( e ) => {
@@ -172,6 +105,22 @@ class HeaderComponent extends React.Component{
             activeTab : prevState.activeTab === activeTab ? "" : activeTab
 
         }));
+
+        if( activeTab === "liked" ){
+
+            if( this.props.likedArticles.length > 0 ){
+
+                this.props.push( "/liked" );
+
+            }
+
+        }
+
+        if( activeTab === "home" ){
+
+            this.props.push( "/" );
+
+        }
 
     }
 
@@ -265,101 +214,25 @@ class HeaderComponent extends React.Component{
 
         }
 
+        if( this.state.activeTab === "liked" && this.props.likedArticles.length === 0 ){
+            
+            return(
+                <Col xs="11" md="5" className="text__align-center header__icon-dropdown liked">
+                    No liked articles!
+                </Col>
+            )
+
+        }
+
     }
 
     render(){
         
-        window.onscroll = () => {
-
-            var header = document.getElementById( "myHeader" );
-            var sticky = header && header.offsetTop;
-
-            if ( ( window.pageYOffset > sticky ) ) {
-
-                this.setState({
-                    headerClass : "header__container mx-auto sticky"
-                });
-    
-            } else {
-    
-                this.setState({
-                    headerClass : "header__container mx-auto"
-                });
-    
-            }
-
-        };
-
         return(
-            <div id="myHeader" className = { this.state.headerClass }>
+            <div id="myHeader" className = "header__container mx-auto">
                 <Container>
                     <Row className = "justify-content-center header__navbar" >
-                        {/*
-                            <Col xs="11" md="3" className="text__align-center">
-                                <input 
-                                    type="search" 
-                                    placeholder="search"
-                                    className = "header__search"
-                                    onChange = { this.handleTextFilter }
-                                />
-                            </Col>
 
-                            <Col xs="11" md="3" className="text__align-center">
-                                <select 
-                                    type = "select" 
-                                    name = "publisherFilter" 
-                                    id = "selectedPublisher"
-                                    value = { this.state.selectedPublisher }  
-                                    onChange = { this.handlePublisherFilter }
-                                    className = "header__filter" 
-                                >
-                                    <option value = "" >None</option>
-                                    {
-                                        this.state.listOfPublishers.map( ( publisher ) => {
-                                            
-                                            return ( <option value = { publisher }>{ publisher }</option> );
-
-                                        })
-
-                                    }
-                                </select>
-                            </Col>
-
-                            <Col xs="11" md="3" className="text__align-center">
-                                <select 
-                                    type = "select" 
-                                    name = "categoryFilter" 
-                                    id = "selectedCategory"
-                                    value = { this.state.selectedCategory }  
-                                    onChange = { this.handleCategoryFilter }
-                                    className = "header__filter" 
-                                >
-                                    <option value = "" >None</option>
-                                    {
-                                        this.state.listOfCategories.map( ( category ) => {
-                                            
-                                            return ( <option value = { category }>{ category }</option> );
-
-                                        })
-
-                                    }
-                                </select>
-                            </Col>
-
-                            <Col xs="11" md="3" className="text__align-center">
-                                <select 
-                                    type = "select" 
-                                    name = "sort" 
-                                    id = "sortedOrder"
-                                    value = { this.state.sortedOrder }  
-                                    onChange = { this.handleSortFilter }
-                                    className = "header__filter" 
-                                >
-                                    <option value = "newToOld" >New to Old</option>
-                                    <option value = "oldToNew" >Old to New</option>
-                                </select>
-                            </Col>
-                        */}
                         <Col xs = "2" className="text__align-center header__icon published">
                             <FaNewspaperO size={40} onClick={ () => { this.setActiveTab( "published" ) } }/>
                         </Col>
@@ -372,9 +245,22 @@ class HeaderComponent extends React.Component{
                         <Col xs = "2" className="text__align-center header__icon search">
                             <FaSearch size={40} onClick={ () => { this.setActiveTab( "search" ) } }/>
                         </Col>
-                        <Col xs = "2" className="text__align-center header__icon heart">
-                            <FaHeart size={40} onClick={ () => { this.setActiveTab( "liked" ) } }/>
-                        </Col>
+                        
+                        {
+                            this.props.path !== "/liked" && 
+                            <Col xs = "2" className="text__align-center header__icon heart">
+                                <FaHeart size={40} onClick={ () => { this.setActiveTab( "liked" ) } }/>
+                            </Col>
+                            
+                        }
+
+                        {
+                            this.props.path === "/liked" && 
+                            <Col xs = "2" className="text__align-center header__icon home">
+                                <FaHome size={40} onClick={ () => { this.setActiveTab( "home" ) } }/>
+                            </Col>
+                            
+                        }
 
                         {
                             this.renderDropDown()
@@ -390,7 +276,8 @@ class HeaderComponent extends React.Component{
 const mapStateToProps = ( store ) => {
 
     return {
-        articles : store.articles
+        articles : store.articles.list,
+        likedArticles : store.articles.liked
     }
 
 }

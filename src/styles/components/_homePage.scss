@@ -4,7 +4,7 @@
 .home__article-container{
     padding: 2rem;
     background-color: white;
-    margin: 5rem;
+    margin: 5rem 1rem;
     word-wrap: break-word;
     box-shadow: rgba(0, 0, 0, 0.1) 2px 8px 34px 13px;
 }
@@ -37,7 +37,22 @@
 
 }
 
+.home__article-publisher{
+
+    font-weight: bold;
+    
+}
+
 .home__article-like svg:hover{
     //color: $bootstrap-danger !important;
     //cursor: pointer;
 }
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+    .home__article-container{
+        margin: 5rem;
+    }
+
+} 

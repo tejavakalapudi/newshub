@@ -12,11 +12,11 @@ class SwitchComponent extends React.Component {
     render(){
 
         return(
-            <div id = "bodyDiv">
-                <Header/>
+            <div className="main__container">
                 <Switch>
                     <Route path = "/" component = { HomePage } exact={true}/>
                     <Route path = "/home" component = { HomePage }/>
+                    <Route path = "/liked" component = { HomePage }/>
                     <Route component = { NotFound } />
                 </Switch>
             </div>
