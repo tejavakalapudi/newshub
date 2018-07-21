@@ -1,0 +1,63 @@
+html {
+    font-size: 62.5%;
+}
+// 1rem = 10px;
+
+body {
+    font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+    font-size: $m-size;
+    background: white;
+    background-image: url(../../public/images/dust_scratches.png);
+}
+
+button, a{
+    cursor: pointer;
+}
+
+button:disabled{
+    cursor: default;
+}
+
+.is-active{
+    font-weight: bold;
+    color: #4A90E2 !important;
+}
+
+hr{
+    display: block;
+    height: 0.1rem;
+    width: 3rem;
+    color: black;
+    background-color: black;
+    margin-left: 0rem;
+    margin-top: 0.1rem;
+    margin-bottom: 0.3rem;
+}
+
+.social-anchor-tag svg:hover{
+    color: #505649 !important;
+    //color: rgb(38, 38, 38) !important;
+    //filter: invert(75%);
+}
+
+.text__align-center{
+    text-align: center;
+}
+
+.text__align-right{
+    text-align: right;
+}
+
+.text__align-left{
+    text-align: left;
+}
+
+.text__align-justify{
+    text-align: justify;
+}
+
+@media (min-width: 1200px){
+    .container {
+        max-width: 1171px;
+    }
+}

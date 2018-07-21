@@ -1,0 +1,43 @@
+.home__container {
+}
+
+.home__article-container{
+    padding: 2rem;
+    background-color: white;
+    margin: 5rem;
+    word-wrap: break-word;
+    box-shadow: rgba(0, 0, 0, 0.1) 2px 8px 34px 13px;
+}
+
+.home__article-title{
+    color: black !important;
+}
+
+.home__article-like svg{
+    //color: grey !important;
+}
+
+.home__article-like{
+
+    svg{
+        color: grey !important;
+        
+        &:hover{
+            color: $bootstrap-danger !important;
+            cursor: pointer;
+        }
+
+    }
+
+    &.active svg{
+
+        color: $bootstrap-danger !important;
+
+    }
+
+}
+
+.home__article-like svg:hover{
+    //color: $bootstrap-danger !important;
+    //cursor: pointer;
+}
