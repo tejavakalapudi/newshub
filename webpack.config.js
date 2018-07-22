@@ -1,6 +1,5 @@
-const path = require( 'path' );
-// console.log( __dirname ); && node webpack.config.js for folder name
 // webpack.js.org
+const path = require( "path" );
 const ExtractTextPlugin = require( "extract-text-webpack-plugin" );
 
 module.exports = ( env ) => {
@@ -53,7 +52,7 @@ module.exports = ( env ) => {
         plugins:[
             CSSExtract
         ],
-        devtool: isProduction ? "source-map" : "inline-source-map", //cheap-module-eval-source-map //inline-source-map(seperate css)
+        devtool: isProduction ? "source-map" : "inline-source-map",
         devServer:{
             contentBase: path.join( __dirname, "public" ),
             compress: true,

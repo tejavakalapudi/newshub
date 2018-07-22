@@ -1,4 +1,3 @@
-import uuid from "uuid";
 import axios from "axios";
 
 export const setArticles = ( articles = [] ) => ({

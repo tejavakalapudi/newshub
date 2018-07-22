@@ -109,12 +109,16 @@ class HomePage extends React.Component {
 
                 <Container>
 
+
+                    {/*
+                        Should only show liked articles on liked page
+                    */}
                     {
 
                         this.props.match.path === "/liked" && this.props.articles && 
                         this.props.articles.filter( ( article ) => this.props.itemsLiked.indexOf( article.ID ) > -1)
                         .slice( 0, this.state.articlesToShow )
-                        .map( ( article ) => this.renderArticleDiv( article ))
+                        .map( ( article ) => this.renderArticleDiv( article ) )
 
                     }
 
@@ -122,7 +126,7 @@ class HomePage extends React.Component {
                     {
                         this.props.match.path !== "/liked" && this.props.articles && 
                         this.props.articles.slice( 0, this.state.articlesToShow )
-                        .map( ( article ) => this.renderArticleDiv( article ))
+                        .map( ( article ) => this.renderArticleDiv( article ) )
                     }
 
 
