@@ -203,8 +203,8 @@ class HeaderComponent extends React.Component{
                             className = "header__dropdown-input" 
                         >
                             <option value = "" >Sort By Date</option>
-                            <option value = "newToOld" >New to Old</option>
-                            <option value = "oldToNew" >Old to New</option>
+                            <option value = "newToOld" >New - Old</option>
+                            <option value = "oldToNew" >Old - New</option>
                         </select>
                     </Col>
                 )
