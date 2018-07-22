@@ -62,6 +62,8 @@ class HeaderComponent extends React.Component{
 
     componentDidMount(){
 
+        //Filter list of publishers and categories in overall articles and update the state accordingly
+       
         let listOfPublishers = [], 
             listOfCategories = [];
         
@@ -87,6 +89,11 @@ class HeaderComponent extends React.Component{
         });
 
     }
+
+    /* 
+        - Used to show/hide the header icon's dropdown
+        - If clicked on HOME or HEART icon, should redirect to respective pages. 
+    */
 
     setActiveTab = ( activeTab ) => {
 
@@ -117,7 +124,11 @@ class HeaderComponent extends React.Component{
         switch( this.state.activeTab ){
 
             case "published" : {
-    
+                
+                /* 
+                    - Icon to sort using list of subscribers.
+                    - Should display all the available publishers as a dropdown list
+                */
                 return (
                     <Col xs="11" md="5" className="text__align-center header__icon-dropdown">
                         <select 
@@ -142,6 +153,11 @@ class HeaderComponent extends React.Component{
                 )
     
             }
+
+            /* 
+                - Icon to sort using list of categories.
+                - Should display all the available categories as a dropdown list
+            */
     
             case "category" : {
     
@@ -169,6 +185,10 @@ class HeaderComponent extends React.Component{
                 )
     
             }
+
+            /* 
+                - Icon to sort by date.
+            */
     
             case "sort" : {
     
@@ -190,7 +210,11 @@ class HeaderComponent extends React.Component{
                 )
     
             }
-    
+            
+            /* 
+                - Icon to search content using text.
+            */
+
             case "search" : {
     
                 return(
@@ -206,6 +230,11 @@ class HeaderComponent extends React.Component{
                 
             }
 
+            /* 
+                - Icon on clicked should generate a drop down if there are no liked articles.
+                - Should redirect to a 'liked' page when there are active liked articles
+            */
+    
             case "liked" : {
                 
                 if( this.props.likedArticles.length === 0  ){
@@ -243,6 +272,9 @@ class HeaderComponent extends React.Component{
                             <FaSearch size={40} onClick={ () => { this.setActiveTab( "search" ) } }/>
                         </Col>
                         
+                        {/*
+                            Following Icon space should toggle between Liked and Home icon
+                        */}
                         {
                             this.props.path !== "/liked" && 
                             <Col xs = "2" className="text__align-center header__icon heart">

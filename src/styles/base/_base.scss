@@ -1,7 +1,8 @@
+// 1rem = 10px;
+
 html {
     font-size: 62.5%;
 }
-// 1rem = 10px;
 
 body {
     font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
@@ -18,22 +19,6 @@ button:disabled{
     cursor: default;
 }
 
-.is-active{
-    font-weight: bold;
-    color: #4A90E2 !important;
-}
-
-hr{
-    display: block;
-    height: 0.1rem;
-    width: 3rem;
-    color: black;
-    background-color: black;
-    margin-left: 0rem;
-    margin-top: 0.1rem;
-    margin-bottom: 0.3rem;
-}
-
 .text__align-center{
     text-align: center;
 }
@@ -48,10 +33,4 @@ hr{
 
 .text__align-justify{
     text-align: justify;
-}
-
-@media ( min-width: 1200px ){
-    .container {
-        max-width: 1171px;
-    }
 }

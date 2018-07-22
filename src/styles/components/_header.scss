@@ -1,5 +1,7 @@
+//BEM - Block Element Modifier naming convention (getbem.com)
+
 .header__container{
-    background-color: #282828;
+    background-color: $header-color ;
     margin: 0 0 2rem;
     padding: 1rem 0;
     position: sticky;
@@ -61,14 +63,6 @@
         color: $bootstrap-primary !important;
     }
 
-}
-
-//BEM - Block Element Modifier naming convention (getbem.com)
-
-@media( min-width : $desktop-breakpoint ){
-    .header {
-        //margin-bottom: $xl-size;
-    }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */

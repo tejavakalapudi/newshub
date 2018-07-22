@@ -2,7 +2,7 @@ import React from "react";
 import AppRouter from "../routers/AppRouter";
 import { Provider } from "react-redux";
 
-class NewApp extends React.Component {
+class NewsApp extends React.Component {
 
     render(){
 
@@ -13,8 +13,9 @@ class NewApp extends React.Component {
                 </Provider>
             </div>
         );
+
     }
 
 };
 
-export default NewApp; 
+export default NewsApp; 
