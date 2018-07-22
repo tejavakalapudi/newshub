@@ -139,7 +139,7 @@ class HeaderComponent extends React.Component{
                             onChange = { this.handlePublisherFilter }
                             className = "header__dropdown-input" 
                         >
-                            <option value = "" >Sort By Publisher</option>
+                            <option value = "" >Filter By Publisher</option>
                             {
                                 this.state.listOfPublishers.map( ( publisher ) => {
                                     
@@ -171,7 +171,7 @@ class HeaderComponent extends React.Component{
                             onChange = { this.handleCategoryFilter }
                             className = "header__dropdown-input" 
                         >
-                            <option value = "" >Sort By Category</option>
+                            <option value = "" >Filter By Category</option>
                             {
                                 this.state.listOfCategories.map( ( category ) => {
                                     
@@ -221,7 +221,7 @@ class HeaderComponent extends React.Component{
                     <Col xs="11" md="5" className="text__align-center header__icon-dropdown">
                         <input 
                             type="search" 
-                            placeholder="search"
+                            placeholder="Filter By Text"
                             className = "header__dropdown-input header__dropdown-search"
                             onChange = { this.handleTextFilter }
                         />
