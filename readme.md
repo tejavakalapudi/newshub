@@ -1,31 +1,34 @@
-# Git Commands
+## Git Commands
 
-git init - Create a new git repo
-git status - View the changes to your project code
-git add - Add files to staging area
-git commit - Creates a new commit with files from staging area
-git log - View recent commits
-
-# Heroku Command
-
-heroku login - Login to heroku CLI
-git push heroku master - Deploy to heroku using git
-
-# Project Update Lifecycle
-
-git add . - Add changes
-git commit -m 'Updated code' - Commit added files with relavent comment
-git push origin master - Push committed files to git repo
-git push heroku master - Push committed files to heroku and deploy the application
-
-# YARN Commands
-
-yarn run dev-server - Initializes live dev server and will stay on watch.
-yarn run build:dev - Builds a development build
-yarn run build:prod - Builds a production build
+* git init - Create a new git repo
+* git status - View the changes to your project code
+* git add - Add files to staging area
+* git commit - Creates a new commit with files from staging area
+* git log - View recent commits
 
 
-# Some cool tools used
+## Heroku Command
+
+* heroku login - Login to heroku CLI
+* git push heroku master - Deploy to heroku using git
+
+
+## Project Update Lifecycle
+
+* git add . - Add changes
+* git commit -m 'Updated code' - Commit added files with relavent comment
+* git push origin master - Push committed files to git repo
+* git push heroku master - Push committed files to heroku and deploy the application
+
+
+## Yarn Commands
+
+* yarn run dev-server - Initializes live dev server and will stay on watch.
+* yarn run build:dev - Builds a development build
+* yarn run build:prod - Builds a production build
+
+
+## Some cool tools used
 
 ### babel-plugin-transform-class-properties
 
