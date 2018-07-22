@@ -1,16 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { 
-    Navbar, 
-    Nav, 
-    NavItem, 
-    Container,
-    Row,Col, 
-    UncontrolledDropdown, 
-    DropdownToggle, 
-    DropdownMenu, 
-} from "reactstrap";
-import { NavLink } from "react-router-dom";
+import { Container, Row, Col } from "reactstrap";
 import { setPublisherFilter, setCategoryFilter, setTextFilter, setSortFilter } from "../actions/filters";
 import { FaHeart, FaSearch, FaNewspaperO, FaSort, FaHome } from "react-icons/lib/fa";
 import { IoGrid  } from "react-icons/lib/io";
@@ -114,9 +104,7 @@ class HeaderComponent extends React.Component{
 
             }
 
-        }
-
-        if( activeTab === "home" ){
+        } else if( activeTab === "home" ){
 
             this.props.push( "/" );
 
@@ -126,110 +114,119 @@ class HeaderComponent extends React.Component{
 
     renderDropDown = () => {
 
-        if( this.state.activeTab === "published" ){
-            return (
-                <Col xs="11" md="5" className="text__align-center header__icon-dropdown">
-                    <select 
-                        type = "select" 
-                        name = "publisherFilter" 
-                        id = "selectedPublisher"
-                        value = { this.state.selectedPublisher }  
-                        onChange = { this.handlePublisherFilter }
-                        className = "header__dropdown-input" 
-                    >
-                        <option value = "" >Sort By Publisher</option>
-                        {
-                            this.state.listOfPublishers.map( ( publisher ) => {
-                                
-                                return ( <option value = { publisher }>{ publisher }</option> );
+        switch( this.state.activeTab ){
 
-                            })
+            case "published" : {
+    
+                return (
+                    <Col xs="11" md="5" className="text__align-center header__icon-dropdown">
+                        <select 
+                            type = "select" 
+                            name = "publisherFilter" 
+                            id = "selectedPublisher"
+                            value = { this.state.selectedPublisher }  
+                            onChange = { this.handlePublisherFilter }
+                            className = "header__dropdown-input" 
+                        >
+                            <option value = "" >Sort By Publisher</option>
+                            {
+                                this.state.listOfPublishers.map( ( publisher ) => {
+                                    
+                                    return ( <option value = { publisher }>{ publisher }</option> );
+    
+                                })
+    
+                            }
+                        </select>
+                    </Col>
+                )
+    
+            }
+    
+            case "category" : {
+    
+                return(
+                    <Col xs="11" md="5" className="text__align-center header__icon-dropdown">
+                        <select 
+                            type = "select" 
+                            name = "categoryFilter" 
+                            id = "selectedCategory"
+                            value = { this.state.selectedCategory }  
+                            onChange = { this.handleCategoryFilter }
+                            className = "header__dropdown-input" 
+                        >
+                            <option value = "" >Sort By Category</option>
+                            {
+                                this.state.listOfCategories.map( ( category ) => {
+                                    
+                                    return ( <option value = { category }>{ category }</option> );
+    
+                                })
+    
+                            }
+                        </select>
+                    </Col>
+                )
+    
+            }
+    
+            case "sort" : {
+    
+                return(
+                    <Col xs="11" md="5" className="text__align-center header__icon-dropdown">
+                        <select 
+                            type = "select" 
+                            name = "sort" 
+                            id = "sortedOrder"
+                            value = { this.state.sortedOrder }  
+                            onChange = { this.handleSortFilter }
+                            className = "header__dropdown-input" 
+                        >
+                            <option value = "" >Sort By Date</option>
+                            <option value = "newToOld" >New to Old</option>
+                            <option value = "oldToNew" >Old to New</option>
+                        </select>
+                    </Col>
+                )
+    
+            }
+    
+            case "search" : {
+    
+                return(
+                    <Col xs="11" md="5" className="text__align-center header__icon-dropdown">
+                        <input 
+                            type="search" 
+                            placeholder="search"
+                            className = "header__dropdown-input header__dropdown-search"
+                            onChange = { this.handleTextFilter }
+                        />
+                    </Col>
+                )
+                
+            }
 
-                        }
-                    </select>
-                </Col>
-            )
-        }
+            case "liked" : {
+                
+                if( this.props.likedArticles.length === 0  ){
 
-        if( this.state.activeTab === "category" ){
+                    return(
+                        <Col xs="11" md="5" className="text__align-center header__icon-dropdown liked">
+                            No liked articles!
+                        </Col>
+                    )
 
-            return(
-                <Col xs="11" md="5" className="text__align-center header__icon-dropdown">
-                    <select 
-                        type = "select" 
-                        name = "categoryFilter" 
-                        id = "selectedCategory"
-                        value = { this.state.selectedCategory }  
-                        onChange = { this.handleCategoryFilter }
-                        className = "header__dropdown-input" 
-                    >
-                        <option value = "" >Sort By Category</option>
-                        {
-                            this.state.listOfCategories.map( ( category ) => {
-                                
-                                return ( <option value = { category }>{ category }</option> );
-
-                            })
-
-                        }
-                    </select>
-                </Col>
-            )
-
-        }
-
-        if( this.state.activeTab === "sort" ){
-
-            return(
-                <Col xs="11" md="5" className="text__align-center header__icon-dropdown">
-                    <select 
-                        type = "select" 
-                        name = "sort" 
-                        id = "sortedOrder"
-                        value = { this.state.sortedOrder }  
-                        onChange = { this.handleSortFilter }
-                        className = "header__dropdown-input" 
-                    >
-                        <option value = "" >Sort By Date</option>
-                        <option value = "newToOld" >New to Old</option>
-                        <option value = "oldToNew" >Old to New</option>
-                    </select>
-                </Col>
-            )
-
-        }
-
-        if( this.state.activeTab === "search" ){
-            
-            return(
-                <Col xs="11" md="5" className="text__align-center header__icon-dropdown">
-                    <input 
-                        type="search" 
-                        placeholder="search"
-                        className = "header__dropdown-input header__dropdown-search"
-                        onChange = { this.handleTextFilter }
-                    />
-                </Col>
-            )
-
-        }
-
-        if( this.state.activeTab === "liked" && this.props.likedArticles.length === 0 ){
-            
-            return(
-                <Col xs="11" md="5" className="text__align-center header__icon-dropdown liked">
-                    No liked articles!
-                </Col>
-            )
-
-        }
+                }
+                
+            }
+        }  
 
     }
 
     render(){
         
         return(
-            <div id="myHeader" className = "header__container mx-auto">
+            <div className = "header__container mx-auto">
                 <Container>
                     <Row className = "justify-content-center header__navbar" >
 

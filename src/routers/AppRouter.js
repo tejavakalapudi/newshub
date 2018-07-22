@@ -2,14 +2,14 @@ import React from "react";
 
 //https://reacttraining.com/react-router/web/guides/philosophy
 import { BrowserRouter } from "react-router-dom"; 
-import SwitchComponent from "../components/Switch";
+import Switch from "./Switch";
 
 class AppRouter extends React.Component {
 
     render(){
         return(
             <BrowserRouter>
-                <SwitchComponent />
+                <Switch />
             </BrowserRouter>
         );
     }

@@ -1,15 +1,5 @@
 import React from "react";
-import { 
-    Container, 
-    Jumbotron,
-    Row, 
-    Col,
-    Nav,
-    NavItem,
-    Navbar,
-    Button,
-    Input 
-} from "reactstrap";
+import { Container, Row, Col, Button } from "reactstrap";
 import { connect } from "react-redux";
 import ScrollToTop from "./ScrollToTop";
 import selectedArticles from "../selectors/articles";
@@ -21,7 +11,8 @@ import Header from "./Header";
 class HomePage extends React.Component {
 
     state = {
-        itemsLiked : []
+        itemsLiked : [],
+        articlesToShow : 10
     }
 
     onClickLikeButton = ( itemLiked ) => {
@@ -32,7 +23,7 @@ class HomePage extends React.Component {
 
                 itemsLiked : [ ...this.state.itemsLiked, itemLiked ]
 
-            }, () => this.props.dispatch( setLikedArticles( this.state.itemsLiked ) ));
+            }, () => this.props.dispatch( setLikedArticles( [ ...this.state.itemsLiked, itemLiked ] ) ));
 
             
         } else {
@@ -60,20 +51,47 @@ class HomePage extends React.Component {
                 <Col xs="12">
                     { `URL : ${ article.URL }` }
                 </Col>
-                <Col xs="10">
+                <Col xs="10" className="home__article-publisher">
                     <span> { `Published on ${ moment( article.TIMESTAMP ).format( "MMMM Do YYYY" ) } by ` } </span>
-                    <span className="home__article-publisher"> { article.PUBLISHER } </span>
+                    <span className="home__article-publisher-name"> { article.PUBLISHER } </span>
                 </Col>
                 <Col 
                     xs="2" 
-                    className= {`text__align-right home__article-like ${ this.state.itemsLiked.indexOf( article.ID ) > -1 ? "active" : "" }`}
-                    onClick = { () => { this.onClickLikeButton( article.ID ); } }
+                    className= {`text__align-right home__article-like ${ this.state.itemsLiked.indexOf( article.ID ) > -1 ? "active" : "" }`} 
                 >
-                    <FaHeart size={20} />
+                    <FaHeart size={20} 
+                        onClick = { () => { this.onClickLikeButton( article.ID ); } }
+                    />
                 </Col>
 
             </Row>
         );
+
+    }
+
+    showMore = ( e ) => {
+
+        e.preventDefault();
+
+        this.setState({
+            articlesToShow : this.state.articlesToShow + 10
+        })
+
+    }
+
+    renderShowMoreButton = () => {
+
+        if( ( this.props.match.path !== "/liked" && this.props.articles.length > this.state.articlesToShow ) || ( this.props.match.path === "/liked" && this.props.itemsLiked.length > this.state.articlesToShow ) ){
+
+            return(
+                <Row className="justify-content-center home__showmore-button">
+                    <Col xs="3" className="text__align-center">
+                        <Button color="danger" onClick = { this.showMore } >More</Button>
+                    </Col> 
+                </Row>
+            )
+
+        }
 
     }
 
@@ -93,33 +111,23 @@ class HomePage extends React.Component {
 
                     {
 
-                        this.props.match.path === "/liked" && this.props.articles && this.props.articles.filter( ( article ) => {
-
-                            if( this.props.match.path === "/liked" ){
-
-                                return this.props.itemsLiked.indexOf( article.ID ) > -1;
-
-                            } else {
-
-                                return true;
-
-                            }
-
-                        }).map( ( article ) => {
-
-                            return this.renderArticleDiv( article );
-
-                        })
+                        this.props.match.path === "/liked" && this.props.articles && 
+                        this.props.articles.filter( ( article ) => this.props.itemsLiked.indexOf( article.ID ) > -1)
+                        .slice( 0, this.state.articlesToShow )
+                        .map( ( article ) => this.renderArticleDiv( article ))
 
                     }
 
 
                     {
-                        this.props.match.path !== "/liked" && this.props.articles && this.props.articles.map( ( article ) => {
+                        this.props.match.path !== "/liked" && this.props.articles && 
+                        this.props.articles.slice( 0, this.state.articlesToShow )
+                        .map( ( article ) => this.renderArticleDiv( article ))
+                    }
 
-                            return this.renderArticleDiv( article );
 
-                        })
+                    {   
+                        this.renderShowMoreButton()
                     }
 
                 </Container>

@@ -3,6 +3,7 @@
     margin: 0 0 2rem;
     padding: 1rem 0;
     position: sticky;
+    position: -webkit-sticky;
     top: 0;
     width: 100%;
     z-index: 1;
@@ -18,7 +19,7 @@
 
     &.liked{
         font-size: 3rem;
-        color: $bootstrap-primary;
+        color: white;
     }
 
 }
@@ -71,14 +72,14 @@
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {
+@media only screen and ( min-width: 768px ) {
     .header__container{
         padding: 2rem 0;
     }
 } 
 
 /* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {
+@media only screen and ( min-width: 992px ) {
 
     .header__container{
         padding: 3rem 0;
