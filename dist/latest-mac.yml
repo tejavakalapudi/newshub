@@ -1,0 +1,12 @@
+version: 1.0.0
+files:
+  - url: NewsHub-1.0.0-mac.zip
+    sha512: 85OIR+JUCXT8V7V8aaFLw8Epijuv6pADY1qkCOzzUo5AISaecR4IXipBzM02SkRkmmLvsHx3tQJ9KEtSKDuXng==
+    size: 70052302
+    blockMapSize: 74112
+  - url: NewsHub-1.0.0.dmg
+    sha512: 3aeVieDtZFmBQOgb31Oxmr6aAn1+JB0Km8eb+frPehCBkmM6gkrN3QFrCZJqsneZxRNUC4FbhnNSTnPrtxYZag==
+    size: 72592792
+path: NewsHub-1.0.0-mac.zip
+sha512: 85OIR+JUCXT8V7V8aaFLw8Epijuv6pADY1qkCOzzUo5AISaecR4IXipBzM02SkRkmmLvsHx3tQJ9KEtSKDuXng==
+releaseDate: '2019-02-08T07:30:14.632Z'
