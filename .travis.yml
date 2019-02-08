@@ -3,4 +3,4 @@ node_js:
   - node
 script:
   - yarn dist
-os: -windows
+os: -osx
